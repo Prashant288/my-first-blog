@@ -1,0 +1,41 @@
+{% extends 'base_blog.html' %}
+{% block content %}
+
+<div class="blog-post">
+  <h2 class="blog-post-title">{{ question.title }}</h2>
+  <p class="blog-post-meta">{{ question.pub_date }}</p>
+  <p>{{ question.textarea }}</p>
+  <p class="blog-post-meta"><a href="blog/{{ category.id }}">more info..</a></p>
+  <hr>
+</div>
+
+
+
+
+<br>
+
+<form  method="post">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  {% if request.user.is_authenticated %}
+       <input type="submit" value="submit" class="btn btn-outline-sucess">
+  {% else %}
+       <input type="submit" value="submit" class="btn btn-outline-sucess" disabled>
+  {% endif %}
+</form>
+
+
+<div class="main-comment-section">
+  {{ comments.count }} comment{{ comments|pluralize }}
+  {% for comment in comments %}
+  <blockquote class="blockquote">
+    <p class="mb-0">{{ comment.content }}</p>
+    <footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst }}</cite></footer>
+
+  </blockquote>
+  {% endfor %}
+
+</div>
+
+
+{% endblock %}

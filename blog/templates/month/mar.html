@@ -1,0 +1,22 @@
+{% extends 'base_blog.html' %}
+
+
+{% block content %}
+{% if fiters %}
+<ul>
+{% for category in fiters %}
+{% if category.pub_date|date:"M" == "Mar" %}
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{ category.title }}</h2>
+        <p class="blog-post-meta">{{ category.pub_date }}</a></p>
+        <p>{{ category.textarea }}</p>
+        <p class="blog-post-meta"><a href="blog/{{ category.id }}">more info..</a></p>
+        <hr>
+      </div><!-- /.blog-post -->
+{% endif %}
+{% endfor %}
+{% else %}
+<strong>there are no categories present</strong>
+{% endif %}
+
+{% endblock %}

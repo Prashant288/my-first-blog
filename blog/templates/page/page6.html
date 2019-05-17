@@ -1,0 +1,23 @@
+{% extends 'base_blog.html' %}
+
+
+
+{% block content %}
+
+{% if category_list %}
+<ul>
+{% for category in category_list %}
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{ category.title }}</h2>
+        <p class="blog-post-meta">{{ category.pub_date }}</p>
+        <p>{{ category.textarea }}</p>
+        <p class="blog-post-meta"><a href="blog/{{ category.id }}">more info..</a></p>
+        <hr>
+      </div><!-- /.blog-post -->
+{% endfor %}
+{% else %}
+<strong>there are no categories present</strong>
+{% endif %}
+
+
+{% endblock %}
